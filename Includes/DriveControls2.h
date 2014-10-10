@@ -25,7 +25,7 @@ const ubyte kNumDriveMotorsPerSide = 2;
 const tMotor kDriveMotorPorts[2][kNumDriveMotorsPerSide] = {{port2, port3}, {port8, port9}}; // {{left motors}, {right motors}}
 const float kWheelDiameter = 4.0;
 
-float driveTicksPerRev = TORQUE_TPR;
+float driveTicksPerRev = 0;
 bool driveDone = false;
 bool turnDone = false;
 word maxSpeed = 127;
