@@ -17,6 +17,8 @@
 #define tmotorVex393TurboSpeed_MC29 9999
 #endif
 
+const ubyte kTurnsPerRev = 1; // Harry add dis to ur codez
+
 const ubyte kNumMotors = 10;
 const tMotor kMotorPort[kNumMotors] = {port1, port2, port3, port4, port5, port6, port7, port8, port9, port10};
 
