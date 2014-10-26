@@ -217,8 +217,10 @@ task drivePID()
     float i = 0.0;
     float d = 0.0;
 
-    short speedL = 0;
-    short speedR = 0;
+    short speedFL = 0;
+    short speedBL = 0;
+    short speedFR = 0;
+    short speedBR = 0;
     
     // ==== determine number of ticks per revolution ====
     if(kMotorType == tmotorVex269 || kMotorType == tmotorVex269_HBridge || kMotorType == tmotorVex269_MC29)
@@ -240,18 +242,18 @@ task drivePID()
         
         driveSpeed = p*kP + i*kI + d*kD;
         
-        float speedFL = limit(error * kP, maxSpeed);
-        float speedBL = limit(error * kP, maxSpeed);
-        float speedFR = limit(error * kP, maxSpeed);
-        float speedBR = limit(error * kP, maxSpeed);
+        speedFL = limit(error * kP, maxSpeed);
+        speedBL = limit(error * kP, maxSpeed);
+        speedFR = limit(error * kP, maxSpeed);
+        speedBR = limit(error * kP, maxSpeed);
         
         
         
         for(ubyte j=0; j<kNumDriveMotorsPerAngle; j++) {
             motor[kDriveMotorPort[j][0]] = trueSpeed(speedFL); // FL
-            motor[kDriveMotorPort[j][1]] = trueSpeed(speedBL); // BL
-            motor[kDriveMotorPort[j][2]] = trueSpeed(speedFR); // FR
-            motor[kDriveMotorPort[j][3]] = trueSpeed(speedBR); // BR
+            motor[kDriveMotorPort[j][0]] = trueSpeed(speedBL); // BL
+            motor[kDriveMotorPort[j][0]] = trueSpeed(speedFR); // FR
+            motor[kDriveMotorPort[j][0]] = trueSpeed(speedBR); // BR
         }
         
         prevError = error;
@@ -273,10 +275,10 @@ void drive(string direction, const float kInches, const word kSpeed = 127)
     const long kDistance = kInches/driveTicksPerRev*kWheelCircumference;
     if(direction = "forward")
     {
-        FL = 1;
-        BL = -1;
-        FR = -1;
-        BR = 1;
+        FL =  1 * limit(error * kP, maxSpeed);
+        BL = -1 * limit(error * kP, maxSpeed);
+        FR = -1 * limit(error * kP, maxSpeed);
+        BR =  1 * limit(error * kP, maxSpeed);
     }
     else if(direction = "backward")
     {
@@ -299,7 +301,7 @@ void turn(const float kAngle, const word kSpeed = 127)
 // Add all encoder values, take distance and avg it, take the avg
 void calculateDistanceTravel()
 {
-    float kInch = kWheelCircumference * motorEncoder[] / TPR_TORQUE
+    float kInch = kWheelCircumference * motorEncoder[] / TPR_TORQUE;
     float revolutions = motorEncoder[port1] / TPR_TORQUE;
     float distanceTravel = kInch * revolutions;
 
@@ -344,10 +346,10 @@ void robotDriveComp()
     stopTask(drivePID);
     
     // Y component, X component, Rotation
-    motor[FL] = -C1LY - C1LX - C1RX;
-    motor[FR] =  C1LY - C1LX - C1RX;
-    motor[BR] =  C1LY + C1LX - C1RX;
-    motor[BL] = -C1LY + C1LX - C1RX;
+    motor[FL] =  C1LY + C1LX + C1RX;
+    motor[FR] = -C1LY + C1LX + C1RX;
+    motor[BR] = -C1LY - C1LX + C1RX;
+    motor[BL] =  C1LY - C1LX + C1RX;
         
     // Motor values can only be updated every 20ms
     wait10Msec(2);
