@@ -156,6 +156,17 @@ void strafeRight()
     polaritySpeedBR =  1;
 }
 
+/*=======================================================*\
+|                          PID TASKS                      |
+| The subsequent tasks will allow for the robot's         |
+| movement be slightly more predictable, which allows us  |
+| to write far more complex/efficient autonomous routines |
+| We use calculus to calculate the current error(How far  |
+| away we are from our target value.) Our previous errors |
+| (how far away we WERE) and Future (How far away we will |
+| be). This uses a very simple to understand equation     |
+\*=======================================================*/
+
 task drivePID()
 {
     const ubyte kDelay = 25;
