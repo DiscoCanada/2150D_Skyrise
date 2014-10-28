@@ -65,7 +65,7 @@ word turnSpeed = 0; // Set Turn Speed to 0 Unless moving, which then gets change
 long motorEncoderDrive[kNumMotors]; // Keeps Track of Which Motors Use Encoders
 long setDistance = 0; // Don't Change This
 float setGyro = 0.0; // Don't Change This
-float encoderAverage = (nMotorEncoder[FL] + nMotorEncoder[FR] + nMotorEncoder[BL] + nMotorEncoder[BR]) / 4;
+float encoderAverage = abs(nMotorEncoder[FL] + nMotorEncoder[FR] + nMotorEncoder[BL] + nMotorEncoder[BR]) / 4;
 float polaritySpeedFL = 0;
 float polaritySpeedBL = 0;
 float polaritySpeedFR = 0;
@@ -92,7 +92,7 @@ void calibrateGyro()
     SensorType[kGyroPort] = sensorGyro; // reconfigure as sensorGyro
     wait1Msec(2000); // wait for calibration: ROBOT MUST STAY STILL
 
-    SensorScale[kGyroPort] = 138; // adjust SensorScale to correct the scaling for your gyro // You actually have to tune this well, unless you love a badly performing robot <3
+    SensorScale[kGyroPort] = 125; // adjust SensorScale to correct the scaling for your gyro // You actually have to tune this well, unless you love a badly performing robot <3
     SensorFullCount[kGyroPort] = 3599; // fix rollover to be "...3598, 3599, 0, 1..."
 }
 
@@ -170,9 +170,9 @@ void strafeRight()
 task drivePID()
 {
     const ubyte kDelay = 25;
-    const float kP = 1.0;
-    const float kI = 0.5;
-    const float kD = 0.5;
+    const float kP = 0.5;
+    const float kI = 0.6;
+    const float kD = 0.3;
     const float kL = 50.0;
     const tSensors kEncoderMotorPort[4] = {port2, port3, port4, port5}; // {left encoder x1,left encoder x2, right encoder x1,right encoder x2}
     const TMotorTypes kMotorType = motorType[kEncoderMotorPort[0]]; // save encoder motor's type
@@ -235,9 +235,9 @@ task drivePID()
 task turnPID()
 {
     const ubyte kDelay = 25;
-    const float kP = 1.0;
-    const float kI = 0.5;
-    const float kD = 0.5;
+    const float kP = 0.545;
+    const float kI = 0.0586;
+    const float kD = 3.37;
     const float kL = 50.0;
     const float kDoneThreshold = 1.0;
     const short kSettleTime = 250;
