@@ -176,8 +176,8 @@ int moar_sensor_menu()
 		lEncoder = "";
 		displayLCDCenteredString(1, "<More | Back>");
 		displayLCDString(0, 0, "L: ");
-		sprintf(rEncoder, "%0.1f", rightdistance()); //Build the value to be displayed
-		sprintf(lEncoder, "%0.1f", leftdistance()); //Build the value to be displayed
+		sprintf(rEncoder, "%0.1f", getDistanceTraveled()); //Build the value to be displayed
+		sprintf(lEncoder, "%0.1f", getDistanceTraveled()); //Build the value to be displayed
 		displayLCDString(0, 2, lEncoder);
 		displayLCDString(0, 9, "R: ");
 		displayLCDString(0, 11, rEncoder);
@@ -212,11 +212,11 @@ int sensor_menu()
 		limitswitch = "";
 		if (SensorValue[rtLiftZero] == 1)
 		{
-			SensorValue[rtLiftPot] = 0;
+			nMotorEncoder[liftElevatorR] = 0;
 		}
 		displayLCDCenteredString(1, "<Moar | Back>");
 		displayLCDString(0, 0, "lift: ");
-		sprintf(liftHeight, "%d", nMotorEncoder[rtLiftPot]); //Build the value to be displayed
+		sprintf(liftHeight, "%d", nMotorEncoder[liftElevatorR]); //Build the value to be displayed
 		displayLCDString(0, 4, liftHeight);
 		sprintf(limitswitch, "%d", SensorValue[rtLiftZero]); //Build the value to be displayed
 		displayLCDString(0, 10, " Lmt:");

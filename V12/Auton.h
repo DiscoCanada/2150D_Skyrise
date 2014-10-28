@@ -19,15 +19,27 @@
 	}
 	fdrive(0);
 } */
+// On Drive:
+// 0 is Forward
+// 1 is Backward
+// 2 is Strafe Left
+// 3 is Strafe Right
+
 void resetAll()
 {
-	PIDreset();
-	resetDrive();
-	startTask(DrivePID);
+	calibrateGyro();
+	startTask(handleEncoders);
+	startTask(drivePID);
+	startTask(turnPID);
+	startTask(syncPID);
+	startTask(liftPIDElevator);
 }
 void autonomous0()
 {
-
+	resetAll();
+	drive(0, 100);
+	waitForDrive();
+	turn(90);
 }
 
 void autonomous1()
@@ -75,7 +87,7 @@ void autonomous10()
 {
 
 }
- 
+
 void autonomous11()
 {
 

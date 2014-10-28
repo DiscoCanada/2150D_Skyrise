@@ -104,7 +104,7 @@ task handleEncoders() {
 
     for(ubyte i=0; i<kNumMotors; i++)
     {
-        motorEncoderLift[i] = 0;
+        motorEncoderDrive[i] = 0;
         prevValue[i] = 0;
     }
     while(true) {
@@ -178,6 +178,11 @@ task drivePID()
     const TMotorTypes kMotorType = motorType[kEncoderMotorPort[0]]; // save encoder motor's type
     const float kDoneThreshold = 1.0;
     const short kSettleTime = 250;
+
+    long speedFL = 0;
+    long speedBL = 0;
+    long speedFR = 0;
+    long speedBR = 0;
 
     float error = 0.0;
     float prevError = 0.0;
@@ -271,29 +276,34 @@ task turnPID()
 		}
 }
 
-void drive(string kDirection, const float kInches, const word kSpeed = 127)
+void drive(short kDirection, const float kInches, const word kSpeed = 127)
 {
 	// This Sets The Drive
+// On Drive:
+// 0 is Forward
+// 1 is Backward
+// 2 is Strafe Left
+// 3 is Strafe Right
 
     const long kDistance = kInches / kWheelCircumference * driveTicksPerRev;
-    
-    if(kDirection == "FORWARD")
+
+    if(kDirection == 0)
     {
         driveForward();
     }
-    else if(kDirection == "BACKWARD")
+    else if(kDirection == 1)
     {
         driveBackward();
     }
-    else if(kDirection == "STRAFE_LEFT")
+    else if(kDirection == 2)
     {
         strafeLeft();
     }
-    else if(kDirection == "STRAFE_RIGHT")
+    else if(kDirection == 3)
     {
         strafeRight();
     }
-    
+
     maxSpeed = abs(kSpeed);
     setDistance += kDistance < 0 ? kDistance : kDistance*sgn(kSpeed);
 }
