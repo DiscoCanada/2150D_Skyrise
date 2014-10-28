@@ -214,10 +214,10 @@ task drivePID()
 
         for(ubyte j=0; j<kNumDriveMotorsPerAngle; j++)
         {
-            motor[kDriveMotorPorts[j][0]] = speedFL; // FL
-            motor[kDriveMotorPorts[j][0]] = speedBL; // BL
-            motor[kDriveMotorPorts[j][0]] = speedFR; // FR
-            motor[kDriveMotorPorts[j][0]] = speedBR; // BR
+            motor[kDriveMotorPorts[j][0]] = speedFL * polaritySpeedFL; // FL
+            motor[kDriveMotorPorts[j][0]] = speedBL * polaritySpeedBL; // BL
+            motor[kDriveMotorPorts[j][0]] = speedFR * polaritySpeedFR; // FR
+            motor[kDriveMotorPorts[j][0]] = speedBR * polaritySpeedBR; // BR
         }
         prevError = error;
 
