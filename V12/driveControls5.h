@@ -36,6 +36,8 @@
 #define C1LY vexRT[Ch3]
 #define C1RX vexRT[Ch1]
 
+
+
 /*======================================================*\
 |                          Variables                     |
 | All of these variables allow for fast/easy programming |
@@ -335,4 +337,36 @@ void getDistanceTraveled()
     float kInch = kWheelCircumference * encoderAverage / driveTicksPerRev;
     float revolutions = encoderAverage / driveTicksPerRev;
     float distanceTravel = kInch * revolutions;
+}
+
+void driveControl()
+{
+    while(true)
+    {
+        // Deadzone
+        if(abs(C1LX) < 15)
+        {
+            motor[FL] = 0;
+            motor[BL] = 0;
+            motor[FR] = 0;
+            motor[BR] = 0;
+        }
+        // Deadzone
+        if(abs(C1LY) < 15)
+        {
+            motor[FL] = 0;
+            motor[BL] = 0;
+            motor[FR] = 0;
+            motor[BR] = 0;
+        }
+        // Deadzone
+        if(abs(C1RX) < 15)
+        {
+            motor[FL] = 0;
+            motor[BL] = 0;
+            motor[FR] = 0;
+            motor[BR] = 0;
+        }
+  
+    }
 }
