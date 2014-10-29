@@ -34,7 +34,7 @@ PID Autotuner
     them to the robot's PID loop, making highly-accurate tunings, which then can be later edited.
     We follow the table:
 
-    |                           Z-N Tuning Method       |
+    |                   Z-N Tuning Method               |  
     | Control Type 	| Kp     	| Ki       	| Kd     	|
     |--------------	|--------	|----------	|--------	|
     | P            	| 0.5Ku  	| -        	| -      	|
