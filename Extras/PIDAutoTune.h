@@ -1,43 +1,60 @@
-	public:
-	PID_ATune(double*, double*);                       	// * Constructor.  links the Autotune to a given PID
-  int Runtime();						   			   	// * Similar to the PID Compue function, returns non 0 when done
-	void Cancel();									   	// * Stops the AutoTune
+// Autotuner Ideas
 
-	void SetOutputStep(double);						   	// * how far above and below the starting value will the output step?
-	double GetOutputStep();							   	//
 
-	void SetControlType(int); 						   	// * Determies if the tuning parameters returned will be PI (D=0)
-	int GetControlType();							   	//   or PID.  (0=PI, 1=PID)
+long kP = 0;
+long kI = 0;
+long kD = 0;
+long tU = 0; // User Input for now
+long kU = 0; // User Input for now
 
-	void SetLookbackSec(int);							// * how far back are we looking to identify peaks
-	int GetLookbackSec();								//
+// P loop tuning
+void tuneP()
+{
+    kP = 0.5 * kU;
+}
 
-	void SetNoiseBand(double);							// * the autotune will ignore signal chatter smaller than this value
-	double GetNoiseBand();								//   this should be acurately set
+// PI loop tuning
+void tunePI()
+{
+    kP = 0.45 * kU;
+    kI = 1.2 * kP / tU;
+}
 
-	double GetKp();										// * once autotune is complete, these functions contain the
-	double GetKi();										//   computed tuning parameters.
-	double GetKd();										//
+// PD loop tuning
+void tunePD()
+{
+    kP = 0.8 * kU;
+    kD = kp * tU / 8;
+}
 
-  private:
-  void FinishUp();
-	bool isMax, isMin;
-	double *input, *output;
-	double setpoint;
-	double noiseBand;
-	int controlType;
-	bool running;
-	unsigned long peak1, peak2, lastTime;
-	int sampleTime;
-	int nLookBack;
-	int peakType;
-	double lastInputs[101];
-  double peaks[10];
-	int peakCount;
-	bool justchanged;
-	bool justevaled;
-	double absMax, absMin;
-	double oStep;
-	double outputStart;
-	double Ku, Pu;
+// PID loop tuning
+void tunePID()
+{
+    kP = 0.60 * kU;
+    kI = 2 * kP * tU;
+    kD = kP * tU / 8;
+}
 
+//Passen Rule loop tuning
+void tunePassen()
+{
+    kP = 0.7 * kU;
+    kI = 0.4 * kP * tU;
+    kD = 0.15 * kP * tU;
+}
+
+// Some Overshoot tuning
+void tuneOvershoot()
+{
+    kP = 0.33 * kU;
+    kI = 2 * kP / tU;
+    kD = kP * tU / 3;
+}
+
+// No Overshoot tuning
+void tuneOvershoot()
+{
+    kP = 0.2 * kU;
+    kI = 2 * kP / tU;
+    kD = kP * tU / 3;
+}
