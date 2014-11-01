@@ -56,5 +56,4 @@ The next things on our list to complete are:
 * Rework the Battery Values for all 3 Batts  
 * Design "Fancier" UI (Not Much Can Be Done)  
 * Make Animations  
-* Add Some Built-In Math Functions.  
-4. Make Sure All Math is Correct  
+* Add Some Built-In Math Functions.   
