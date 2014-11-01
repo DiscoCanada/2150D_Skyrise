@@ -47,13 +47,14 @@ PID Autotuner
 
 ##TODO
 ---------
+
 The next things on our list to complete are:
-    1. Add In Autonomii
-    2. Finish Up PID Loop
-    3. Revise LCD Menu
-        * Add Encoder Values / Lift Heights
-        * Rework the Battery Values for all 3 Batts
-        * Design "Fancier" UI (Not Much Can Be Done)
-        * Make Animations
-        * Add Some Built-In Math Functions.
-    4. Make Sure All Math is Correct
+    1. Add In Autonomii  
+    2. Finish Up PID Loop  
+    3. Revise LCD Menu  
+        * Add Encoder Values / Lift Heights  
+        * Rework the Battery Values for all 3 Batts  
+        * Design "Fancier" UI (Not Much Can Be Done)  
+        * Make Animations  
+        * Add Some Built-In Math Functions.  
+    4. Make Sure All Math is Correct  
