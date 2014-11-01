@@ -20,6 +20,7 @@
     Our Lift Control Uses an array of sensors to get the most accurate readings for controling
     our lift. Again, fully packaged with our ground-breaking PID package. Soon, however we will 
     replace the PID package with a much higher-end PID autotuining software that Harrison has designed.
+
 ###IntakeControl.h
 
 ###menu.h
