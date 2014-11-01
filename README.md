@@ -1,14 +1,14 @@
-2150D_Skyrise
+#2150D_Skyrise
 =============
 
-Main Class Files
+##Main Class Files
 -----------------
 2150CompControl.c
   
     Stores the basic competition outline that teams have to follow, not much interesting info here.
     We can call methods into this class to bring our competition controls into a centralized location.
   
-Header Files
+##Header Files
 ----------------
 DriverControl.h
     This Stores all of the driver control code, as well as our PID library. 
@@ -26,7 +26,7 @@ menu.h
 
 auton.h
 
-PID Based Software
+##PID Based Software
 -------------------
 PID Autotuner
     This PID Autotuner relies on the ziegler-nichols method to tune the PID, while not variable like some other PID 
@@ -44,3 +44,16 @@ PID Autotuner
     | Passen Rule   | 0.7Ku  	| 0.4Kp/Tu  | 0.15KpTu 	|
     | Some Overshoot| 0.33Ku  	| 2Kp/Tu    | KpTu/3 	|
     | No Overshoot  | 0.2Ku  	| 2Kp/Tu    | KpTu/3 	|
+
+##TODO
+---------
+The next things on our list to complete are:
+    1. Add In Autonomii
+    2. Finish Up PID Loop
+    3. Revise LCD Menu
+        * Add Encoder Values / Lift Heights
+        * Rework the Battery Values for all 3 Batts
+        * Design "Fancier" UI (Not Much Can Be Done)
+        * Make Animations
+        * Add Some Built-In Math Functions.
+    4. Make Sure All Math is Correct
