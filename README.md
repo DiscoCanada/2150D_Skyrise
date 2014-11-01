@@ -3,32 +3,32 @@
 
 ##Main Class Files
 -----------------
-2150CompControl.c
+###2150CompControl.c
   
     Stores the basic competition outline that teams have to follow, not much interesting info here.
     We can call methods into this class to bring our competition controls into a centralized location.
   
 ##Header Files
 ----------------
-DriverControl.h
+###DriverControl.h
     This Stores all of the driver control code, as well as our PID library. 
     Found in V10, V11, and V12 this code is amazingly writen, and can be used on any 
     holonomic-type drivetrain.
     Next summer we will be releasing a software that allows for easy PID writing.
 
-LiftControl.h
+###LiftControl.h
     Our Lift Control Uses an array of sensors to get the most accurate readings for controling
     our lift. Again, fully packaged with our ground-breaking PID package. Soon, however we will 
     replace the PID package with a much higher-end PID autotuining software that Harrison has designed.
-IntakeControl.h
+###IntakeControl.h
 
-menu.h
+###menu.h
 
-auton.h
+###auton.h
 
 ##PID Based Software
 -------------------
-PID Autotuner
+###PID Autotuner
     This PID Autotuner relies on the ziegler-nichols method to tune the PID, while not variable like some other PID 
     controllers, this allows us to take pre-determined values such as Ku and Tu, which we have found for you, and apply
     them to the robot's PID loop, making highly-accurate tunings, which then can be later edited.
@@ -58,3 +58,11 @@ The next things on our list to complete are:
       * Make Animations  
       * Add Some Built-In Math Functions.  
     4. Make Sure All Math is Correct  
+1. Item 1
+1. A corollary to the above item.
+2. Yet another point to consider.
+2. Item 2
+* A corollary that does not need to be ordered.
+* This is indented four spaces, because it's two spaces further than the item above.
+* You might want to consider making a new list.
+3. Item 3
