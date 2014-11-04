@@ -4,60 +4,67 @@
 // Reverse BL
 // BR Is Same
 
-float kp=0.3;
-float conversionfactor=627.2/(3.14*3.25*1.41)
+float kP=0.3;
+float kConversionFactor=627.2/(3.14*3.25*1.41)
 bool finished=true;
-int flgoal;
-int frgoal;
-int blgoal;
-int brgoal;
+int kFlGoal;
+int kFrGoal;
+int kBlGoal;
+int kBrGoal;
+int kTurnGoal;
+
+void turn(float angle, float direction)// Direction 1 = (Left 0 - 180) Direction 2 = (Right 181 - 360)
+{
+    while(!finished){}
+    turngoal = angle;
+}
 
 void forward(float distance)
 {
     while(!finished){}
-    flgoal=distance*conversionfactor;
-    frgoal=distance*conversionfactor;
-    blgoal=distance*conversionfactor;
-    brgoal=distance*conversionfactor;
+    kFlGoal=distance*kConversionFactor;
+    kFrGoal=distance*kConversionFactor;
+    kBlGoal=distance*kConversionFactor;
+    kBrGoal=distance*kConversionFactor;
 }
 void backward(float distance)
 {
     while(!finished){}
-    flgoal=-distance*conversionfactor;
-    frgoal=-distance*conversionfactor;
-    blgoal=-distance*conversionfactor;
-    brgoal=-distance*conversionfactor;
+    kFlGoal=-distance*kConversionFactor;
+    kFrGoal=-distance*kConversionFactor;
+    kBlGoal=-distance*kConversionFactor;
+    kBrGoal=-distance*kConversionFactor;
 }
 void strafeleft(float distance)
 {
     while(!finished){}
-    flgoal=-distance*conversionfactor;
-    frgoal=distance*conversionfactor;
-    blgoal=distance*conversionfactor;
-    brgoal=-distance*conversionfactor;
+    kFlGoal=-distance*kConversionFactor;
+    kFrGoal=distance*kConversionFactor;
+    kBlGoal=distance*kConversionFactor;
+    kBrGoal=-distance*kConversionFactor;
 }
 void straferight(float distance)
 {
     while(!finished){}
-    flgoal=distance*conversionfactor;
-    frgoal=-distance*conversionfactor;
-    blgoal=-distance*conversionfactor;
-    brgoal=distance*conversionfactor;
+    kFlGoal=distance*kConversionFactor;
+    kFrGoal=-distance*kConversionFactor;
+    kBlGoal=-distance*kConversionFactor;
+    kBrGoal=distance*kConversionFactor;
 }
 
 task drivePID()
 {
 	while(1)
     {
-        while((abs(flgoal-SensorValue(fl))>50)) //probably should do all 4 but i was lazy
+        while((abs(flgoal-SensorValue(fl))>50) && abs(abs(flgoal-SensorValue(fr))>50) && (abs(flgoal-SensorValue(bl))>50) && (abs(flgoal-SensorValue(br))>50)) //probably should do all 4 but i was lazy
 		{
 			finished=false;
-            motor[fl]=kp*(flgoal-SensorValue(fl));
-            motor[fr]=kp*(frgoal-SensorValue(fr));
-            motor[bl]=kp*(blgoal-SensorValue(bl));
-            motor[br]=kp*(brgoal-SensorValue(br));
+            motor[fl]=kP*(flgoal-SensorValue(fl));
+            motor[fr]=kP*(frgoal-SensorValue(fr));
+            motor[bl]=kP*(blgoal-SensorValue(bl));
+            motor[br]=kP*(brgoal-SensorValue(br));
         }
-        if(abs(flgoal-SensorValue(fl))<=50)
+        if(abs(flgoal-SensorValue(fl))<=50 && abs(flgoal-SensorValue(fr))<=50 && abs(flgoal-SensorValue(bl))<=50 && abs(flgoal-SensorValue(br))<=50)
         {
             finished=true;
             flgoal=0;
