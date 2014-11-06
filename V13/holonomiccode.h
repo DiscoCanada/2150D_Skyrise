@@ -7,7 +7,7 @@
 float kP=0.3;
 float kDriveWidth = 7.5;
 float kConversionFactor=627.2/(3.14*3.25*1.41)
-float kTurnGoal = PI*kDriveWidth/360;
+float kTurnConversionFactor = nMotorEncoder[br]/kTicksPerRev*kWheelSize*pow(PI,2)*kDriveWidth/360;
 float kAngles;
 bool finished=true;
 int kFlGoal;
@@ -21,13 +21,24 @@ int kAnglesBR;
 
 
 
-void turn(float angle, float direction)// Direction 1 = (Left 0 - 180) Direction 2 = (Right 181 - 360)
+void turn(float angle, float direction)// Direction 1 = (Right 0 - 180) Direction 2 = (Left 181 - 360)
 {
-    while(!finished){}
-    kAnglesFL = nMotorEncoder[fl]/kTicksPerRev*kWheelSize*pow(PI,2)*kDriveWidth/360;
-    kAnglesFR = nMotorEncoder[fr]/kTicksPerRev*kWheelSize*pow(PI,2)*kDriveWidth/360;
-    kAnglesBL = nMotorEncoder[bl]/kTicksPerRev*kWheelSize*pow(PI,2)*kDriveWidth/360;
-    kAnglesBR = nMotorEncoder[br]/kTicksPerRev*kWheelSize*pow(PI,2)*kDriveWidth/360;
+    if(direction == 1) // Turn Right
+    {
+        while(!finished){}
+        kAnglesFL = angle * kTurnConversionFactor;
+        -kAnglesFR = angle * kTurnConversionFactor;
+        -kAnglesBL = angle * kTurnConversionFactor;
+        kAnglesBR = angle * kTurnConversionFactor;
+    }
+    if (direction == 2)
+    {
+        while(!finished){}
+        -kAnglesFL = angle * kTurnConversionFactor;
+        kAnglesFR = angle * kTurnConversionFactor;
+        kAnglesBL = angle * kTurnConversionFactor;
+        -kAnglesBR = angle * kTurnConversionFactor;
+    }
 }
 
 void forward(float distance)
