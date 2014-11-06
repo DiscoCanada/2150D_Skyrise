@@ -5,18 +5,29 @@
 // BR Is Same
 
 float kP=0.3;
+float kDriveWidth = 7.5;
 float kConversionFactor=627.2/(3.14*3.25*1.41)
+float kTurnGoal = PI*kDriveWidth/360;
+float kAngles;
 bool finished=true;
 int kFlGoal;
 int kFrGoal;
 int kBlGoal;
 int kBrGoal;
-int kTurnGoal;
+int kAnglesFR;
+int kAnglesFL;
+int kAnglesBL;
+int kAnglesBR;
+
+
 
 void turn(float angle, float direction)// Direction 1 = (Left 0 - 180) Direction 2 = (Right 181 - 360)
 {
     while(!finished){}
-    turngoal = angle;
+    kAnglesFL = nMotorEncoder[fl]/kTicksPerRev*kWheelSize*pow(PI,2)*kDriveWidth/360;
+    kAnglesFR = nMotorEncoder[fr]/kTicksPerRev*kWheelSize*pow(PI,2)*kDriveWidth/360;
+    kAnglesBL = nMotorEncoder[bl]/kTicksPerRev*kWheelSize*pow(PI,2)*kDriveWidth/360;
+    kAnglesBR = nMotorEncoder[br]/kTicksPerRev*kWheelSize*pow(PI,2)*kDriveWidth/360;
 }
 
 void forward(float distance)
@@ -56,7 +67,7 @@ task drivePID()
 {
 	while(1)
     {
-        while((abs(flgoal-SensorValue(fl))>50) && abs(abs(flgoal-SensorValue(fr))>50) && (abs(flgoal-SensorValue(bl))>50) && (abs(flgoal-SensorValue(br))>50)) //probably should do all 4 but i was lazy
+        while((abs(kFlGoal-SensorValue(fl))>50) && abs(abs(kFrGoal-SensorValue(fr))>50) && (abs(kBlGoal-SensorValue(bl))>50) && (abs(kBrGoal-SensorValue(br))>50)) //probably should do all 4 but i was lazy
 		{
 			finished=false;
             motor[fl]=kP*(flgoal-SensorValue(fl));
@@ -64,7 +75,7 @@ task drivePID()
             motor[bl]=kP*(blgoal-SensorValue(bl));
             motor[br]=kP*(brgoal-SensorValue(br));
         }
-        if(abs(flgoal-SensorValue(fl))<=50 && abs(flgoal-SensorValue(fr))<=50 && abs(flgoal-SensorValue(bl))<=50 && abs(flgoal-SensorValue(br))<=50)
+        if(abs(kFlGoal-SensorValue(fl))<=50 && abs(kFrGoal-SensorValue(fr))<=50 && abs(kBlGoal-SensorValue(bl))<=50 && abs(kBrGoal-SensorValue(br))<=50)
         {
             finished=true;
             flgoal=0;
@@ -79,3 +90,35 @@ task drivePID()
     }
 }
 
+// So circumference formula is PI*d
+task turnPID()
+{
+    while (1)
+    {
+        while ((abs(kAnglesFL - SensorValue(fl))>50) && (abs(kAnglesFR - SensorValue(fr)>50) && (abs(kAnglesBL - SensorValue(bl)>50) && (abs(kAnglesBR - SensorValue(br)>50))
+        {
+            finished=false;
+            motor[fl]=kP*(kAnglesFL-SensorValue(fl));
+            motor[fr]=kP*(kAnglesFR-SensorValue(fr));
+            motor[bl]=kP*(kAnglesBL-SensorValue(bl));
+            motor[br]=kP*(kAnglesBR-SensorValue(br));
+        }
+        if((abs(kAnglesFL - SensorValue(fl))<=50) && (abs(kAnglesFR - SensorValue(fr)<=50) && (abs(kAnglesBL - SensorValue(bl)<=50) && (abs(kAnglesBR - SensorValue(br)<=50))
+        {
+            finished=true;
+            kAnglesFL = 0;
+            kAnglesFR = 0;
+            kAnglesBL = 0;
+            kAnglesBR = 0;
+            SensorValue(fl) = 0;
+            SensorValue(fr) = 0;
+            SensorValue(bl) = 0;
+            SensorValue(br) = 0;
+        }
+    }
+}
+
+//[11/6/14, 7:33:04 AM] Jordan Kiesel: So Harry then divide by 360 to get number of inches per degree.
+//[11/6/14, 7:33:13 AM] Griffin Tabor: harry to calculate
+//find distance from center of robot to center of a wheel
+//PI*kDriveWidth/360.
