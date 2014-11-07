@@ -157,5 +157,33 @@ task userLiftElevator()
 
 task userLiftArm()
 {
+  const TVexJoysticks kBtnU8 = Btn8U; // y-axis joystick channel
+  const TVexJoysticks kBtnD8 = Btn8D;
+  const TVexJoysticks kBtnL8 = Btn8L;
+  const TVexJoysticks kBtnR8 = Btn8R;
+  int i = 1;
+  while(true)
+    {
+      y = vexRT[kChY2]; // y component
 
+      motor[el] = vexRT[kBtnU8];
+      motor[er] = vexRT[kBtnD8];
+
+      // if btn 7U is pressed, then lift to next height. Make sure it has a way to decrease i++.
+      if(vexRT[kBtnL8] == 1)
+      {
+        i++;
+        liftArm(i);
+      }
+      else if(vexRT[kBtnR8])
+      {
+        i--;
+        liftArm(i);
+      }
+
+      if(i > 1)
+      {
+          i = 1;
+      }
+    }
 }
