@@ -7,7 +7,9 @@ const tSensors kGyroPort = in1; // gyroscopic sensor port/name
 
 float kP=0.3;
 float kDriveWidth = 7.5;
-float kConversionFactor=627.2/(3.14*3.25*1.41)
+float kConversionFactor=627.2/(3.14*3.25*1.41);
+float kTicksPerRev = 627.2;
+float kWheelSize = 3.25;
 float kTurnConversionFactor = nMotorEncoder[br]/kTicksPerRev*kWheelSize*pow(PI,2)*kDriveWidth/360;
 float kAngles;
 float gyroOffset = 90.0; // degrees CCW from +x axis robot faces at gyro=0

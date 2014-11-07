@@ -9,7 +9,7 @@
 //To Reset Call resetAll();, ResetPID();, or ResetDrive;
 // call lift(rot); for changing lift height.
 // call startTask(liftHeightPresetxyz); to have the lift go to a certain preset height.
-//For any other sensory input just call a while loop
+//For any other sensory input just call a while loop or an if statement
 */
 
 /* void alignGoalScore(){
@@ -35,9 +35,14 @@ void resetAll()
 void autonomous0()
 {
 	resetAll();
-	openLift();
+	openIntake();
 	forward(10);
 	turn(1, 90);
+	strafeleft(15);
+	backward(10);
+	liftElevator(2);
+	liftElevator(3);
+	turn(1, 180);
 }
 
 void autonomous1()
