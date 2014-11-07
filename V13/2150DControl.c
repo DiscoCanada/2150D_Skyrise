@@ -192,6 +192,8 @@ task usercontrol()
   while (true)
   {
     StartTask(userDriveHolo);
+    StartTask(liftPIDArm);
+    StartTask(LiftPIDElevator);
     StartTask(userLiftElevator);
     StartTask(userLiftArm);
     StartTask(userIntake);

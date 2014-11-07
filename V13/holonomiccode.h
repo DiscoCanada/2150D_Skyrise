@@ -94,18 +94,18 @@ task drivePID()
         while((abs(kFlGoal-SensorValue(fl))>50) && abs(abs(kFrGoal-SensorValue(fr))>50) && (abs(kBlGoal-SensorValue(bl))>50) && (abs(kBrGoal-SensorValue(br))>50)) //probably should do all 4 but i was lazy
 		{
 			finished=false;
-            motor[fl]=kP*(flgoal-SensorValue(fl));
-            motor[fr]=kP*(frgoal-SensorValue(fr));
-            motor[bl]=kP*(blgoal-SensorValue(bl));
-            motor[br]=kP*(brgoal-SensorValue(br));
+            motor[fl]=kP*(kFlGoal-SensorValue(fl));
+            motor[fr]=kP*(kFrGoal-SensorValue(fr));
+            motor[bl]=kP*(kBlGoal-SensorValue(bl));
+            motor[br]=kP*(kBrGoal-SensorValue(br));
         }
         if(abs(kFlGoal-SensorValue(fl))<=50 && abs(kFrGoal-SensorValue(fr))<=50 && abs(kBlGoal-SensorValue(bl))<=50 && abs(kBrGoal-SensorValue(br))<=50)
         {
             finished=true;
-            flgoal=0;
-            frgoal=0;
-            blgoal=0;
-            brgoal=0;
+            kFLGoal=0;
+            kFRGoal=0;
+            kBLGoal=0;
+            kBRGoal=0;
             SensorValue(fl)=0;
             SensorValue(fr)=0;
             SensorValue(bl)=0;
