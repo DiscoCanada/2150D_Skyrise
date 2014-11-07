@@ -123,8 +123,37 @@ task liftPIDElevator()
 
 task userLiftElevator()
 {
+  const TVexJoysticks kChY2 = Ch2; // y-axis joystick channel
+  const TVexJoysticks kBtnU7 = Btn7U;
+  const TVexJoysticks kBtnD7 = Btn7D;
+  int i = 1;
+  while(true)
+    {
+      y = vexRT[kChY2]; // y component
 
+      motor[el] =  y;
+      motor[er] = -y;
+
+      // if btn 7U is pressed, then lift to next height. Make sure it has a way to decrease i++.
+      if(vexRT[kBtnU7] == 1)
+      {
+        i++;
+        liftElevator(i);
+      }
+      else if(vexRT[kBtnD7])
+      {
+        i--;
+        liftElevator(i);
+      }
+
+      if(i > 1)
+      {
+          i = 1;
+      }
+    }
 }
+// TODO: Implement a method to build skyrises by just pressing a button. In this case just do an i++.
+
 
 task userLiftArm()
 {
