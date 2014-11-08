@@ -35,7 +35,7 @@ void resetAll()
 void autonomous0()
 {
 	resetAll();
-	openIntake();
+	//openIntake();
 	forward(10);
 	turn(1, 90);
 	strafeleft(15);
@@ -43,7 +43,6 @@ void autonomous0()
 	liftElevator(2);
 	liftElevator(3);
 	turn(1, 180);
-	
 }
 
 void autonomous1()
