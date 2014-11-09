@@ -145,9 +145,9 @@ task turnPID()
 
 
 task userDriveHolo() {
-    const TVexJoysticks kChY = Ch3; // y-axis joystick channel
-    const TVexJoysticks kChX = Ch4; // x-axis joystick channel
-    const TVexJoysticks kChR = Ch1; // rotation joystick channel
+    const TVexJoysticks kChY = Ch2; // y-axis joystick channel
+    const TVexJoysticks kChX = Ch1; // x-axis joystick channel
+    const TVexJoysticks kChR = Ch4; // rotation joystick channel
     const short kDelay = 25; // milliseconds for loop delay
     const ubyte kNumWheels = 4; // number of drive wheels
     const ubyte kNumMotorsPerWheel = 2; // max number of motors per wheel
