@@ -2,7 +2,7 @@
 // Reverse FR
 // Reverse BL
 // BR Is Same
-
+// ALL CREDIT GOES TO JORDAN KIESEL AND GRIFFIN TABOR
 const tSensors kGyroPort = in1; // gyroscopic sensor port/name
 
 float kP=0.3;
