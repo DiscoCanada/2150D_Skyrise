@@ -128,7 +128,7 @@ task turnPID()
             motor[bl]=kP*(kAnglesBL-SensorValue(bl));
             motor[br]=kP*(kAnglesBR-SensorValue(br));
         }
-        if((abs(kAnglesFL - SensorValue(fl))<=50) && (abs(kAnglesFR - SensorValue(fr))<=50) && (abs(kAnglesBL - SensorValue(bl))<=50) && (abs(kAnglesBR - SensorValue(br))<=50))
+        if(abs(kAnglesFL - SensorValue(fl))<=50 && abs(kAnglesFR - SensorValue(fr))<=50 && abs(kAnglesBL - SensorValue(bl))<=50 && abs(kAnglesBR - SensorValue(br))<=50)
         {
             finished=true;
             kAnglesFL = 0;
@@ -144,7 +144,8 @@ task turnPID()
 }
 
 
-task userDriveHolo() {
+task userDriveHolo()
+{
     const TVexJoysticks kChY = Ch2; // y-axis joystick channel
     const TVexJoysticks kChX = Ch1; // x-axis joystick channel
     const TVexJoysticks kChR = Ch4; // rotation joystick channel
@@ -162,7 +163,8 @@ task userDriveHolo() {
     word x,y,r;
     float gyro,radius,theta,a,b,wheelSpeed[kNumWheels],topSpeed;
 
-    while(true) {
+    while(true)
+      {
         // ==== collect joystick & sensor values ====
         x = vexRT[kChX]; // x component
         y = vexRT[kChY]; // y component

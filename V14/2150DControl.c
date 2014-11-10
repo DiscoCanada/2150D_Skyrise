@@ -188,13 +188,10 @@ task usercontrol()
   bLCDBacklight = true;
 
   //Driver Control Loop
-  while (true)
+  while(true)
   {
     StartTask(userDriveHolo);
-    StartTask(liftPIDArm);
-    StartTask(LiftPIDElevator);
     StartTask(userLiftElevator);
     StartTask(userLiftArm);
-    calibrateGyro();
   }
 }

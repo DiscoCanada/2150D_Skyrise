@@ -83,13 +83,13 @@ task liftPIDArm()
 {
   while(1)
   {
-    while((abs(kALGoal-SensorValue(al))>50) && (abs(kARGoal-SensorValue(ar))>50))
+    while((abs(kALGoal-SensorValue(al))>10) && (abs(kARGoal-SensorValue(ar))>10))
     {
       finished=false;
       motor[al]=kPLift*(kALGoal-SensorValue(al));
       motor[ar]=kPLift*(kARGoal-SensorValue(ar));
     }
-    if(abs(kALGoal-SensorValue(al))<=50 && abs(kARGoal-SensorValue(ar))<=50)
+    if(abs(kALGoal-SensorValue(al))<=10 && abs(kARGoal-SensorValue(ar))<=10)
     {
       finished=true;
       kALGoal=0;
@@ -140,7 +140,8 @@ task userLiftElevator()
 
 task userLiftArm()
 {
-  const TVexJoysticks kChY2 = Ch2; // y-axis joystick channel
+  const TVexJoysticks kBtnU6 = Btn6U;
+  const TVexJoysticks kBtnD6 = Btn6D;
   int i = 1;
   int y;
   while(true)
