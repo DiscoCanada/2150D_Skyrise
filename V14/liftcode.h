@@ -97,6 +97,7 @@ task liftPIDArm()
       SensorValue(al)=0;
       SensorValue(ar)=0;
     }
+    wait1Msec(25);
   }
 }
 
@@ -118,6 +119,7 @@ task liftPIDElevator()
       SensorValue(el)=0;
       SensorValue(er)=0;
     }
+    wait1Msec(25);
   }
 }
 
@@ -133,6 +135,7 @@ task userLiftElevator()
 
       motor[er] = vexRT[kBtnU5]*127;
       motor[er] = vexRT[kBtnD5]*-127;
+      wait1Msec(25);
     }
 }
 // TODO: Implement a method to build skyrises by just pressing a button. In this case just do an i++.
@@ -150,6 +153,7 @@ task userLiftArm()
 
       motor[al] =  y2;
       motor[ar] =  y2;
+      wait1Msec(25);
     }
 }
 
