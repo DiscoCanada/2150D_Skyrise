@@ -93,32 +93,34 @@ task drivePID()
 	while(1)
     {
         while((abs(kFlGoal-SensorValue(fl))>50) && (abs(kFrGoal-SensorValue(fr))>50) && (abs(kBlGoal-SensorValue(bl))>50) && (abs(kBrGoal-SensorValue(br))>50)) //probably should do all 4 but i was lazy
-		{
-			finished=false;
-            motor[fl]=kP*(kFlGoal-SensorValue(fl));
-            motor[fr]=kP*(kFrGoal-SensorValue(fr));
-            motor[bl]=kP*(kBlGoal-SensorValue(bl));
-            motor[br]=kP*(kBrGoal-SensorValue(br));
+    		{
+    			finished=false;
+          motor[fl]=kP*(kFlGoal-SensorValue(fl));
+          motor[fr]=kP*(kFrGoal-SensorValue(fr));
+          motor[bl]=kP*(kBlGoal-SensorValue(bl));
+          motor[br]=kP*(kBrGoal-SensorValue(br));
         }
         if(abs(kFlGoal-SensorValue(fl))<=50 && abs(kFrGoal-SensorValue(fr))<=50 && abs(kBlGoal-SensorValue(bl))<=50 && abs(kBrGoal-SensorValue(br))<=50)
         {
-            finished=true;
-            kFrGoal=0;
-            kFrGoal=0;
-            kBlGoal=0;
-            kBrGoal=0;
-            SensorValue(fl)=0;
-            SensorValue(fr)=0;
-            SensorValue(bl)=0;
-            SensorValue(br)=0;
+          finished=true;
+          kFlGoal=0;
+          kFrGoal=0;
+          kBlGoal=0;
+          kBrGoal=0;
+          SensorValue(fl)=0;
+          SensorValue(fr)=0;
+          SensorValue(bl)=0;
+          SensorValue(br)=0;
         }
+
+      wait1Msec(25);
     }
 }
 
 // So circumference formula is PI*d
 task turnPID()
 {
-    while (1)
+    while(1)
     {
         while((abs(kAnglesFL - SensorValue(fl))>50) && (abs(kAnglesFR - SensorValue(fr))>50) && (abs(kAnglesBL - SensorValue(bl))>50) && (abs(kAnglesBR - SensorValue(br))>50))
         {
@@ -140,6 +142,7 @@ task turnPID()
             SensorValue(bl) = 0;
             SensorValue(br) = 0;
         }
+        wait1Msec(25);
     }
 }
 
@@ -204,6 +207,11 @@ task userDriveHolo()
 
         wait1Msec(kDelay);
     }
+}
+
+void getDistanceTraveled()
+{
+  kConversionFactor;
 }
 //find distance from center of robot to center of a wheel
 //PI*kDriveWidth/360.
