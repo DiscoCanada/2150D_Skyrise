@@ -193,5 +193,6 @@ task usercontrol()
     StartTask(userDriveHolo);
     StartTask(userLiftElevator);
     StartTask(userLiftArm);
+    StartTask(userIntake);
   }
 }
