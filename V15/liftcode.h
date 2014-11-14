@@ -75,6 +75,26 @@ void armUp(int timeSec)
 	motor[ar] = 0;
 }
 
+
+void elevatorDown(int timeSec)
+{
+  motor[el] = -127;
+  motor[er] = -127;
+  wait1Msec(timeSec);
+  motor[el] = 0;
+  motor[er] = 0;
+}
+
+void armDown(int timeSec)
+{
+  motor[al] = -127;
+  motor[ar] = -127;
+  wait1Msec(timeSec);
+  motor[al] = 0;
+  motor[ar] = 0;
+}
+
+
       // if btn 7U is pressed, then lift to next height. Make sure it has a way to decrease i++.
       /*
       if(vexRT[kBtnU7] == 1)

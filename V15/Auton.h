@@ -37,6 +37,7 @@ void autonomous0()
 	resetAll();
 	//openIntake();
 	forward(10);
+	elevatorUp(2300);
 	turn(1, 90);
 	strafeleft(15);
 	backward(10);
