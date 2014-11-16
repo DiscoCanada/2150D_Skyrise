@@ -193,7 +193,7 @@ task usercontrol()
 {
 	startTask(Menu);
 
-	while (true)
+	while(true)
 	{
 		startTask(driveComp);
 		startTask(armComp);
