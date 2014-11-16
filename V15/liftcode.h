@@ -88,7 +88,7 @@ void elevatorDown(int timeSec)
 void armDown(int timeSec)
 {
   motor[al] = -127;
-  motor[ar] = -127;
+  motor[ar] = 127;
   wait1Msec(timeSec);
   motor[al] = 0;
   motor[ar] = 0;
