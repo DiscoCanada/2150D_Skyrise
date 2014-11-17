@@ -766,16 +766,19 @@ task ArmPID() {
 	nMotorEncoder[aBotL] = 0;
 	nMotorEncoder[aTopL] = 0;
 	while(true) {
-		if(abs(armT-nMotorEncoder[aBotR])>40 && ) {
-			if(nMotorEncoder[aBotR] < armT && nMotorEncoder[aBotL] < armT && nMotorEncoder[aBotL] < armT nMotorEncoder[aBotL] < armT) {
+		if(abs(armT-nMotorEncoder[aBotR])>40 && abs(armT-nMotorEncoder[aBotL])>40 && abs(armT-nMotorEncoder[aTopL])>40 && abs(armT-nMotorEncoder[aTopR])>40)
+			{
+			if(nMotorEncoder[aBotR] < armT && nMotorEncoder[aBotL] < armT && nMotorEncoder[aTopL] < armT && nMotorEncoder[aTopR] < armT) {
 				arm(127);
-			}else
+			}
+			else
 			{
 				arm(-127);
 			}
-		}else
+		}
+		else
 		{
-			arm(16);
+			arm(17);
 		}
 		wait1Msec(50);
 	}
@@ -981,6 +984,7 @@ task usercontrol()
 
 		if(vexRT[Btn7D]) {
 			nMotorEncoder[aBotR] = 0;
+			nMotorEncoder[aTopR] = 0;
 		}
 
 		if(vexRT[Btn7U]) {
