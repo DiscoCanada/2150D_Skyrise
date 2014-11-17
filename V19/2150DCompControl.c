@@ -941,9 +941,11 @@ task Record()
 	nMotorEncoder[bl] = 0;
 	nMotorEncoder[br] = 0;
 	nMotorEncoder[aBotR] = 0;
+	nMotorEncoder[aTopR] = 0;
 	while(motor[bl] == 0
 		&& motor[br] == 0
 		&& nMotorEncoder[aBotR] == 0
+		&& nMotorEncoder[aTopR] == 0
 		&& motor[intakeL] == 0) { wait1Msec(1); }
 	writeDebugStream("int autonomous[150][5] = {");
 	for(int i = 0; i < 150; i ++)
@@ -959,7 +961,7 @@ task Record()
 		autonomous1[i][0] = dL;
 		autonomous1[i][1] = dR;
 		autonomous1[i][2] = aPB;
-		autonomous1[i][3] = apT;
+		autonomous1[i][3] = aPT;
 		autonomous1[i][4] = iP;
 		autonomous1[i][5] = cP;
 		wait1Msec(100);
