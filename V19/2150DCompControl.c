@@ -48,11 +48,12 @@ int trueSpeed(int power) {
 	return ((power>0)?1:-1)*tsArray[power*((power>0)?1:-1)];
 }
 
-void arcadeDrive(int forward, int right, int slightright) {
-	motor[fl] = forward + right + slightright/2;
-	motor[bl] =  forward + right + slightright/2;
-	motor[fr] = forward - right - slightright/2;
-	motor[br] =  forward - right - slightright/2;
+void arcadeDrive(int forward, int strafe, int turn) //forward controls distance(for/back)
+{
+	motor[fl] = forward + right - turn;
+	motor[bl] = forward + right - turn;
+	motor[fr] = forward - right - turn;
+	motor[br] = forward - right - turn;
 }
 
 #define LCD_LEFT 1
@@ -923,7 +924,7 @@ task usercontrol()
 		}else
 		{
 			if(braking) stopTask(ActiveBrake);
-			arcadeDrive(trueSpeed(vexRT[Ch3]),trueSpeed(vexRT[Ch1]),0);
+			arcadeDrive(trueSpeed(vexRT[Ch3]),trueSpeed(vexRT[Ch4]),trueSpeed(vexRT[Ch1]));
 			braking = false;
 		}
 
