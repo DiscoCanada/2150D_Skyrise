@@ -759,16 +759,18 @@ int driveR = 0;
 int armTBot = 0;
 int armTTop = 0;
 
-// Redo
-task ArmPID() {
+// P loop for the arm's control.
+task ArmPID()
+{
 	nMotorEncoder[aBotR] = 0;
 	nMotorEncoder[aTopR] = 0;
 	nMotorEncoder[aBotL] = 0;
 	nMotorEncoder[aTopL] = 0;
-	while(true) {
-		if(abs(armT-nMotorEncoder[aBotR])>40 && abs(armT-nMotorEncoder[aBotL])>40 && abs(armT-nMotorEncoder[aTopL])>40 && abs(armT-nMotorEncoder[aTopR])>40)
-			{
-			if(nMotorEncoder[aBotR] < armT && nMotorEncoder[aBotL] < armT && nMotorEncoder[aTopL] < armT && nMotorEncoder[aTopR] < armT) {
+	while(true)
+	{
+		if(abs(armTBot-nMotorEncoder[aBotR])>40 && abs(armTBot-nMotorEncoder[aBotL])>40 && abs(armTTop-nMotorEncoder[aTopL])>40 && abs(armTTop-nMotorEncoder[aTopR])>40)
+		{
+			if(nMotorEncoder[aBotR] < armTBot && nMotorEncoder[aBotL] < armTBot && nMotorEncoder[aTopL] < armTTop && nMotorEncoder[aTopR] < armTTop) {
 				arm(127);
 			}
 			else
@@ -784,13 +786,15 @@ task ArmPID() {
 	}
 }
 
-// Controls drive position
-task DrivePID() {
+// PD Loop Controls drive position
+task DrivePID()
+{
 	nMotorEncoder[bl] = 0;
 	nMotorEncoder[br] = 0;
 	int dLP = 0;
 	int dRP = 0;
-	while(true) {
+	while(true)
+	{
 		int dL = driveL-nMotorEncoder[bl];
 		int dR = driveR-nMotorEncoder[br];
 		float kP = 0.3;
@@ -803,11 +807,14 @@ task DrivePID() {
 		wait1Msec(100);
 	}
 }
-
-void replay1() {
+// Replay <-- One of the most amazing pices of software,
+// which allows for the user to record their autonomous into an array
+void replay1()
+{
 	startTask(DrivePID);
 	startTask(ArmPID);
-	for(int i = 0; i < 150; i ++) {
+	for(int i = 0; i < 150; i ++)
+	{
 		driveL = autonomous1[i][0];
 		driveR = autonomous1[i][1];
 		armTBot = autonomous1[i][2];
@@ -821,10 +828,12 @@ void replay1() {
 	tank(0,0);
 }
 
-void replay2() {
+void replay2()
+{
 	startTask(DrivePID);
 	startTask(ArmPID);
-	for(int i = 0; i < 150; i ++) {
+	for(int i = 0; i < 150; i ++)
+	{
 		driveL = autonomous2[i][0];
 		driveR = autonomous2[i][1];
 		armTBot = autonomous2[i][2];
@@ -838,10 +847,12 @@ void replay2() {
 	tank(0,0);
 }
 
-void replay3() {
+void replay3()
+{
 	startTask(DrivePID);
 	startTask(ArmPID);
-	for(int i = 0; i < 150; i ++) {
+	for(int i = 0; i < 150; i ++)
+	{
 		driveL = autonomous3[i][0];
 		driveR = autonomous3[i][1];
 		armTBot = autonomous3[i][2];
@@ -855,10 +866,12 @@ void replay3() {
 	tank(0,0);
 }
 
-void replay4() {
+void replay4()
+{
 	startTask(DrivePID);
 	startTask(ArmPID);
-	for(int i = 0; i < 150; i ++) {
+	for(int i = 0; i < 150; i ++)
+	{
 		driveL = autonomous4[i][0];
 		driveR = autonomous4[i][1];
 		armTBot = autonomous4[i][2];
@@ -872,9 +885,10 @@ void replay4() {
 	tank(0,0);
 }
 
-task autonomous() {
-
-	switch(auto) {
+task autonomous()
+{
+	switch(auto)
+	{
 		case 0: replay1(); break;
 		case 1: replay2(); break;
 		case 2: replay3(); break;
@@ -886,13 +900,15 @@ task autonomous() {
 bool braking = false;
 bool recording = false;
 
-task ActiveBrake() {
+task ActiveBrake()
+{
 	braking = true;
 	tank(0,0);
 	wait1Msec(500);
 	int dLP = nMotorEncoder[bl];
 	int dRP = nMotorEncoder[br];
-	while(true) {
+	while(true)
+	{
 		int dL = dLP-nMotorEncoder[bl];
 		int dR = dRP-nMotorEncoder[br];
 		float kP = 0.4;
@@ -904,7 +920,8 @@ task ActiveBrake() {
 }
 
 // This records the autonomous and prints it to a debug table.
-task Record() {
+task Record()
+{
 	nMotorEncoder[bl] = 0;
 	nMotorEncoder[br] = 0;
 	nMotorEncoder[aBotR] = 0;
@@ -913,7 +930,8 @@ task Record() {
 		&& nMotorEncoder[aBotR] == 0
 		&& motor[intakeL] == 0) { wait1Msec(1); }
 	writeDebugStream("int autonomous[150][5] = {");
-	for(int i = 0; i < 150; i ++) {
+	for(int i = 0; i < 150; i ++)
+	{
 		int dL = nMotorEncoder[bl]; // Left Side
 		int dR = nMotorEncoder[br]; // Right Side
 		int aPB = nMotorEncoder[aBotR]; // Bottom R
@@ -937,10 +955,12 @@ task Record() {
 // Controls user shiz
 task usercontrol()
 {
-	while(true) {
+	while(true)
+		{
 		if(trueSpeed(vexRT[Ch3]) == 0 && trueSpeed(vexRT[Ch1]) == 0) {
 			if(!braking) startTask(ActiveBrake);
-		}else
+		}
+		else
 		{
 			if(braking) stopTask(ActiveBrake);
 			arcadeDrive(trueSpeed(vexRT[Ch3]),trueSpeed(vexRT[Ch4]),trueSpeed(vexRT[Ch1]));
@@ -963,10 +983,12 @@ task usercontrol()
 		motor[aTopR] = armP;
 
 		int intakeP = 0;
-		if(vexRT[Btn6U]) {
+		if(vexRT[Btn6U])
+		{
 			intakeP = 127;
 		}
-		if(vexRT[Btn6D]) {
+		if(vexRT[Btn6D])
+		{
 			intakeP = -127;
 		}
 		motor[intakeL] = intakeP;
@@ -977,17 +999,20 @@ task usercontrol()
 		displayLCDCenteredString(0,"Dark Matter");
 		displayLCDCenteredString(1,"2150D");
 
-		if(vexRT[Btn8U]) {
+		if(vexRT[Btn8U])
+		{
 			recording = true;
 			startTask(Record);
 		}
 
-		if(vexRT[Btn7D]) {
+		if(vexRT[Btn7D])
+		{
 			nMotorEncoder[aBotR] = 0;
 			nMotorEncoder[aTopR] = 0;
 		}
 
-		if(vexRT[Btn7U]) {
+		if(vexRT[Btn7U])
+		{
 			stopTask(ActiveBrake);
 			//replay1();
 		}
