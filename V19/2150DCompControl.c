@@ -28,6 +28,9 @@
 
 #include "Vex_Competition_Includes.c"   //Main competition background code...do not modify!
 
+// TODO: Make sure code is ready for holonomic(Test on My Drivetrain)
+// TODO: Make sure rerun/PID is not messed up.
+
 int trueSpeed(int power) {
 	int tsArray[128] =
 	{
@@ -50,10 +53,10 @@ int trueSpeed(int power) {
 
 void arcadeDrive(int forward, int strafe, int turn) //forward controls distance(for/back)
 {
-	motor[fl] = forward + right - turn;
-	motor[bl] = forward + right - turn;
-	motor[fr] = forward - right - turn;
-	motor[br] = forward - right - turn;
+	motor[fl] = forward + strafe - turn;
+	motor[bl] = forward + strafe - turn;
+	motor[fr] = forward - strafe - turn;
+	motor[br] = forward - strafe - turn;
 }
 
 #define LCD_LEFT 1
@@ -774,6 +777,7 @@ task ArmPID() {
 	}
 }
 
+// Controls drive position
 task DrivePID() {
 	nMotorEncoder[bl] = 0;
 	nMotorEncoder[br] = 0;
@@ -888,6 +892,7 @@ task ActiveBrake() {
 	}
 }
 
+// This records the autonomous and prints it to a debug table.
 task Record() {
 	nMotorEncoder[bl] = 0;
 	nMotorEncoder[br] = 0;
@@ -898,9 +903,9 @@ task Record() {
 		&& motor[intakeL] == 0) { wait1Msec(1); }
 	writeDebugStream("int autonomous[150][5] = {");
 	for(int i = 0; i < 150; i ++) {
-		int dL = nMotorEncoder[bl];
-		int dR = nMotorEncoder[br];
-		int aP = nMotorEncoder[aBotR];
+		int dL = nMotorEncoder[bl]; // Left Side
+		int dR = nMotorEncoder[br]; // Right Side
+		int aP = nMotorEncoder[aBotR]; // Bottom R(Possibly add top R?)
 		int iP = motor[intakeL];
 		int cP = SensorValue[s_claw];
 		if(i > 0) writeDebugStream(",");
@@ -916,6 +921,7 @@ task Record() {
 	writeDebugStream("}");
 }
 
+// Controls user shiz
 task usercontrol()
 {
 	while(true) {
