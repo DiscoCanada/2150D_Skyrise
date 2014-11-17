@@ -53,11 +53,27 @@ int trueSpeed(int power) {
 
 void arcadeDrive(int forward, int strafe, int turn) //forward controls distance(for/back)
 {
-	motor[fl] = forward + strafe - turn;
-	motor[bl] = forward + strafe - turn;
-	motor[fr] = forward - strafe - turn;
-	motor[br] = forward - strafe - turn;
+	motor[fl] = forward - strafe + turn;
+	motor[bl] = forward - strafe - turn;
+	motor[fr] = forward + strafe + turn;
+	motor[br] = forward + strafe - turn;
 }
+
+/*
+   /FL		FR\
+
+
+	 \BL		BR/
+	Starting off, motors are all "positive"
+	going forward. The only time they arent,
+	is when they are in reverse, in which all
+	values will be negative. When factoring in
+	the strafe value, the robot will move left/right
+	based on the same principal of +127 & -127.
+	Lastly, turning comes into play, when the
+	robot's values are either all - or all positive,
+	and then it will turn in place.
+*/
 
 #define LCD_LEFT 1
 #define LCD_CENTER 2
