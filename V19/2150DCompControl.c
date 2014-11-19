@@ -1632,7 +1632,7 @@ task usercontrol()
 {
 	while(true)
 		{
-		if(trueSpeed(vexRT[Ch3]) == 0 && trueSpeed(vexRT[Ch1]) == 0) {
+		if(trueSpeed(vexRT[Ch3]) == 0 && trueSpeed(vexRT[Ch1]) == 0 && trueSpeed(vexRT[Ch4]) == 0) {
 			if(!braking) startTask(ActiveBrake);
 		}
 		else
@@ -1645,11 +1645,13 @@ task usercontrol()
 		int armP = 16;
 		if(vexRT[Btn5U]) {
 			armP = 127;
-		}else
-		if(vexRT[Btn5D]) {
+			wait1Msec(20);
+		}
+		else if(vexRT[Btn5D]) {
 			armP = -127;
-		}else
-		if(abs(nMotorEncoder[aBotR]) < 40) {
+			wait1Msec(20);
+		}
+		else if(abs(nMotorEncoder[aBotR]) < 40) {
 			armP = -16;
 		}
 		motor[aBotL] = armP;
@@ -1661,10 +1663,12 @@ task usercontrol()
 		if(vexRT[Btn6U])
 		{
 			intakeP = 127;
+			wait1Msec(20);
 		}
 		if(vexRT[Btn6D])
 		{
 			intakeP = -127;
+			wait1Msec(20);
 		}
 		motor[intakeL] = intakeP;
 		motor[intakeR] = intakeP;
