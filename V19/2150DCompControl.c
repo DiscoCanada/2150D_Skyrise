@@ -1657,17 +1657,17 @@ task usercontrol()
 		motor[aBotR] = armP;
 		motor[aTopR] = armP;
 
-		//int intakeP = 0;
-		//if(vexRT[Btn6U])
-		//{
-			//intakeP = 127;
-		//}
-		//if(vexRT[Btn6D])
-		//{
-			//intakeP = -127;
-		//}
-		//motor[intakeL] = intakeP;
-		//motor[intakeR] = intakeP;
+		int intakeP = 0;
+		if(vexRT[Btn6U])
+		{
+			intakeP = 127;
+		}
+		if(vexRT[Btn6D])
+		{
+			intakeP = -127;
+		}
+		motor[intakeL] = intakeP;
+		motor[intakeR] = intakeP;
 
 		SensorValue[s_claw] = vexRT[Btn6U];
 
