@@ -1645,11 +1645,9 @@ task usercontrol()
 		int armP = 16;
 		if(vexRT[Btn5U]) {
 			armP = 127;
-			wait1Msec(20);
 		}
 		else if(vexRT[Btn5D]) {
 			armP = -127;
-			wait1Msec(20);
 		}
 		else if(abs(nMotorEncoder[aBotR]) < 40) {
 			armP = -16;
@@ -1659,21 +1657,19 @@ task usercontrol()
 		motor[aBotR] = armP;
 		motor[aTopR] = armP;
 
-		int intakeP = 0;
-		if(vexRT[Btn6U])
-		{
-			intakeP = 127;
-			wait1Msec(20);
-		}
-		if(vexRT[Btn6D])
-		{
-			intakeP = -127;
-			wait1Msec(20);
-		}
-		motor[intakeL] = intakeP;
-		motor[intakeR] = intakeP;
+		//int intakeP = 0;
+		//if(vexRT[Btn6U])
+		//{
+			//intakeP = 127;
+		//}
+		//if(vexRT[Btn6D])
+		//{
+			//intakeP = -127;
+		//}
+		//motor[intakeL] = intakeP;
+		//motor[intakeR] = intakeP;
 
-		SensorValue[s_claw] = vexRT[Btn8D];
+		SensorValue[s_claw] = vexRT[Btn6U];
 
 		displayLCDCenteredString(0,"Dark Matter");
 		displayLCDCenteredString(1,"2150D");
