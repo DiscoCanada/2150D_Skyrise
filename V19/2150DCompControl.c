@@ -996,6 +996,7 @@ task usercontrol()
 		else if(abs(nMotorEncoder[aBotR]) < 40) {
 			armP = -16;
 		}
+		
 		motor[aBotL] = armP;
 		motor[aTopL] = armP;
 		motor[aBotR] = armP;
