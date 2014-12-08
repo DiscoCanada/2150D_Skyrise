@@ -209,9 +209,14 @@ task usercontrol()
 		// Testing Variables
 		calibrateGyro();
 	  startTask(handleEncoders);
-	  startTask(trackXYT);
-	  startTask(userDriveHolo);
+
+		// Background PID 'n' Such
 		startTask(armPID);
+		startTask(trackXYT);
+
+		//Driver Control
+		startTask(userDriveHolo);
+		startTask(userLiftRD4B);
 
 		//Control Recorder
 		if(vexRT[Btn7L] == 1)
