@@ -93,11 +93,12 @@ void programming()
 task recordAuto()
 {
 	// Global Values
-	int x = destpos.x;
-	int y = destpos.y;
-	int t = destpos.t;
+	int x = currpos.x;
+	int y = currpos.y;
+	int t = currpos.t;
 	int rotationB = SensorValue[m_lftLB];
 	int rotationT = SensorValue[m_lftLT];
+	int intake = SensorValue[p_intClaw];
 
 	// Set Encoder Values to 0
 	nMotorEncoder[m_lftLB] = 0;
@@ -113,7 +114,8 @@ task recordAuto()
 	for(int i = 0; i < 150; i++)
 	{
 		writeDebugStream("setXYT(%f,%f,%d)\n",x,y,t );
-		wait1Msec(10);
 		writeDebugStream("lift(%f, %d)\n", rotationB, rotationT);
+		writeDebugStream("intake(%d)\n", intake);
+		wait1Msec(100);
 	}
 }

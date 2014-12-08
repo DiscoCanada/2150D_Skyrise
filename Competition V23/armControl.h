@@ -108,7 +108,11 @@ task userLiftRD4B()
 	arm(powah);
 }
 
-SensorValue(p_intClaw) = vexRT[Btn8L];
+// Intake Control
+task userIntakeSrise()
+{
+	SensorValue(p_intClaw) = vexRT[Btn8L];
+}
 
 void lift(int rotationB, int rotationT)
 {

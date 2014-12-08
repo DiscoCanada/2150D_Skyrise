@@ -30,17 +30,17 @@ const ubyte kNumWheels = 4; // number of drive wheels
 const ubyte kNumMotorsPerWheel = 2; // max number of motors per wheel
 const tMotor kNone = -1; // used for indicating the lack of an additional motor
 const tMotor kDriveMotorPort[kNumWheels][kNumMotorsPerWheel] = { // drive motor ports/names
-  {port2, kNone}, // front-left
-  {port3, kNone}, // front-right
-  {port4, kNone}, // back-left
-  {port5, kNone}  // back-right
+  {m_FL, kNone}, // front-left
+  {m_FR, kNone}, // front-right
+  {m_BL, kNone}, // back-left
+  {m_BR, kNone}  // back-right
 };
 const ubyte kNumDriveEncoders = 4;
-const tMotor kDriveEncoderMotorPort[kNumDriveEncoders] = {port1, port2, port3, port4};
+const tMotor kDriveEncoderMotorPort[kNumDriveEncoders] = {m_FL, m_FR, m_BL, m_BR};
 // tankDrive: {90.0,90.0} // hDrive: {90.0,0.0,90.0} // kiwiDrive: {60.0,120.0,0.0}
 // xDrive OR mecanumDrive: {135.0,45.0,135.0,45} // plusDrive: {90.0,0.0,90.0,0.0}
 const float kDriveEncoderMotorAngle[kNumDriveEncoders] = {135.0, 45.0, 135.0, 45.0};
-const float kWheelDiameter = 4.0; // inches
+const float kWheelDiameter = 2.75; // inches
 const bool kDriveIME = true; // set to false if using quadrature encoders
 const ubyte kDefaultLoopDelay = 25;
 
@@ -296,10 +296,10 @@ task userDriveHolo() {
   const ubyte kNumMotorsPerWheel = 2; // max number of motors per wheel
   const tMotor kNone = -1; // used for indicating the lack of an additional motor
   const tMotor kMotorPort[kNumWheels][kNumMotorsPerWheel] = { // drive motor ports/names
-    {port1, kNone}, // front-left
-    {port2, kNone}, // front-right
-    {port3, kNone}, // back-left
-    {port4, kNone}  // back-right
+    {m_FL, kNone}, // front-left
+    {m_FR, kNone}, // front-right
+    {m_BL, kNone}, // back-left
+    {m_BR, kNone}  // back-right
   };
 
   word x,y,r;
