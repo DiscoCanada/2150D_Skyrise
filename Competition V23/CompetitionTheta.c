@@ -90,13 +90,13 @@ task autonomous()
 	int finalCount = count;
 
 	// Set The Intake to Open
-	SensorValue[p_intClaw] = 0;
+	SensorValue[p_intClaw] = 1;
 
 	//Stop The Menu Task
 	stopTask(Menu);
 
 	//Consult The Menu Class to Run Autonomous Mode
-	switch (finalCount)
+	switch(finalCount)
 	{
 	case 0:
 		{
