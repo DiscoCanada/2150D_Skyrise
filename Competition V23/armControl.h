@@ -62,14 +62,20 @@ task userLiftRD4B()
 		if(vexRT[Btn5U]==1)
 		{
 				kCurrLiftValue++;
-				while(vexRT[Btn5U]{}
+				while(vexRT[Btn5U])
+				{
+					wait1Msec(10);
+				}
 		}
 
 		// Lift Down
 		if(vexRT[Btn5D]==1)
 		{
 			kCurrLiftValue--;
-			while(vexRT[Btn5D]{}
+			while(vexRT[Btn5D])
+			{
+				wair1Msec(10);
+			}
 		}
 
 		// Normalize Values
