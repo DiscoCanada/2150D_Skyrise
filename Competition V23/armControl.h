@@ -144,7 +144,15 @@ task userLiftRD4B()
 // Intake Control
 task userIntakeSrise()
 {
-	SensorValue(p_intClaw) = vexRT[Btn8L];
+	boolean actuate = false;
+	while(true)
+	{
+		if(vexRT[Btn8D] != actuate)
+		{
+			actuate = !actuate;
+			if(actuate) SensorValue[s_intClaw] = !SensorValue[s_intClaw];
+		}
+	}
 }
 
 void lift(int rotationB, int rotationT)
