@@ -115,9 +115,27 @@ task userLiftRD4B()
 				lift(110, 110);
 		}
 
+		if(kCurrLiftValue == 4)
+		{
+				lift(250, 250);
+		}
+
+		if(kCurrLiftValue == 5)
+		{
+				lift(360, 360);
+		}
+
+		if(kCurrLiftValue == 6)
+		{
+				lift(480, 480);
+		}
+
+		if(kCurrLiftValue == 7)
+		{
+				lift(500, 500);
+		}
 		wait1Msec(25);
 	}
-
 	// Control Buttons
 	int power = vexRT[Btn6U]*127 - vexRT[Btn6D]*127;
 	arm(power);
