@@ -119,8 +119,8 @@ task userLiftRD4B()
 	}
 
 	// Control Buttons
-	int powah = vexRT[Btn6U]*127 - vexRT[Btn6D]*127;
-	arm(powah);
+	int power = vexRT[Btn6U]*127 - vexRT[Btn6D]*127;
+	arm(power);
 }
 
 // Intake Control
