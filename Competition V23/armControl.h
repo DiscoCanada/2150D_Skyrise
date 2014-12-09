@@ -81,23 +81,38 @@ task userLiftRD4B()
 		if(kCurrLiftValue == 0)
 		{
 			// Bring Lift To Starting/Gathering Pos
-			armTBot = 0;
-			armTTop = 0;
+			lift(0, 0);
 
 			// Set Encoders To Zero
-			nMotorEncoder[m_lftLB] = 0;
-			nMotorEncoder[m_lftLT] = 0;
-			nMotorEncoder[m_rtLB] = 0;
-			nMotorEncoder[m_rtLT] = 0;
+			if(s_lftZero == 1 && s_rtZero == 1)
+			{
+				nMotorEncoder[m_lftLB] = 0;
+				nMotorEncoder[m_lftLT] = 0;
+				nMotorEncoder[m_rtLB] = 0;
+				nMotorEncoder[m_rtLT] = 0;
+			}
+			else if(s_lftZero == 0 || s_rtZero == 0)
+			{
+				arm(-127);
+			}
 
 			// Bring Lift To Zero
-			armTBot = 0;
-			armTTop = 0;
+			lift(0, 0);
 		}
 
 		if(kCurrLiftValue == 1)
 		{
-				lift(100 , 100)
+				lift(100 , 100);
+		}
+
+		if(kCurrLiftValue == 2)
+		{
+				lift(0, 0);
+		}
+
+		if(kCurrLiftValue == 3)
+		{
+				lift(110, 110);
 		}
 
 		wait1Msec(25);
