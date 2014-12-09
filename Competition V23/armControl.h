@@ -61,14 +61,14 @@ task userLiftRD4B()
 		// Lift Up
 		if(vexRT[Btn5U]==1)
 		{
-				kCurrLiftValue++
+				kCurrLiftValue++;
 				while(vexRT[Btn5U]{}
 		}
 
 		// Lift Down
 		if(vexRT[Btn5D]==1)
 		{
-			kCurrLiftValue--
+			kCurrLiftValue--;
 			while(vexRT[Btn5D]{}
 		}
 
