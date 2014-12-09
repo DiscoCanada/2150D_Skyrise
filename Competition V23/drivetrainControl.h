@@ -251,7 +251,7 @@ task trackXYT() {
     diffPos.y = destPos.y - currPos.y;
     diffPos.t = destPos.t - currPos.t;
 
-    // convert from cartesian to polar
+    // convert from polar to cartesian
     radius = sqrt(pow(diffPos.x,2) + pow(diffPos.y,2)); // r^2 = x^2 + y^2
     theta = atan2(diffPos.y,diffPos.x)*180.0/PI; // tan(t) = y/x
 
