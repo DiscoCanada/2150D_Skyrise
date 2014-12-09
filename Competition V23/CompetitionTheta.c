@@ -89,9 +89,6 @@ task autonomous()
 	// Naming Convention, Due to Multiple Counts Running
 	int finalCount = count;
 
-	// Set The Intake to Open
-	SensorValue[p_intClaw] = 1;
-
 	//Stop The Menu Task
 	stopTask(Menu);
 

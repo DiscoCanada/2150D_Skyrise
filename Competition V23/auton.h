@@ -1,5 +1,7 @@
 void resetAll()
 {
+	// Set The Intake to Open
+	SensorValue[p_intClaw] = 1;
 	startTask(handleEncoders);
 	startTask(trackXYT);
 	startTask(ArmPID);
