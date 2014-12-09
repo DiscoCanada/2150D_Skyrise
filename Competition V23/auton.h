@@ -96,8 +96,8 @@ task recordAuto()
 	int x = currpos.x;
 	int y = currpos.y;
 	int t = currpos.t;
-	int rotationB = SensorValue[m_lftLB];
-	int rotationT = SensorValue[m_lftLT];
+	int rotationB = nMotorEncoder[m_lftLB];
+	int rotationT = nMotorEncoder[m_lftLT];
 	int intake = SensorValue[p_intClaw];
 
 	// Set Encoder Values to 0
