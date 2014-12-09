@@ -17,10 +17,6 @@
 #define tmotorVex393TurboSpeed_MC29 9999
 #endif
 
-#define LCD_LEFT 1
-#define LCD_CENTER 2
-#define LCD_RIGHT 4
-
 const ubyte kNumMotors = 10;
 const tMotor kMotorPort[kNumMotors] = {port1, port2, port3, port4, port5, port6, port7, port8, port9, port10};
 
