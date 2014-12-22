@@ -41,6 +41,10 @@ word turnSpeed = 0;
 word syncSpeed = 0;
 long motorEncoder[kNumMotors];
 long setDistance = 0;
+long polarityFL = 0;
+long polarityFR = 0;
+long polarityBL = 0;
+long polarityBR = 0;
 float setGyro = 0.0;
 word setLift = 0;
 
@@ -68,8 +72,48 @@ void calibrateGyro()
   SensorFullCount[kGyroPort] = 3599; // fix rollover to be "...3598, 3599, 0, 1..."
 }
 
-void drive(const float kInches, const word kSpeed = 127) {
+void drive(const float kInches, const float kPolarity, const word kSpeed = 127) {
   const long kDistance = kInches/driveTicksPerRev*kWheelDiameter*PI; // convert from inches to ticks
+
+  if(kPolarity == 0)
+  {
+    // Run Motors Regularly
+    polarityFL = 1;
+    polarityFR = -1;
+    polarityBL = 1;
+    polarityBR = -1;
+  }
+  else if(kPolarity == 1)
+  {
+    polarityFL = -1;
+    polarityFR = 1;
+    polarityBL = -1;
+    polarityBR = 1;
+  }
+  else if(kPolarity == 2)
+  {
+    polarityFL = 1;
+    polarityFR = -1;
+    polarityBL = -1;
+    polarityBR = 1;
+  }
+  else if(kPolarity == 3)
+  {
+    // Run Motors in Right
+    polarityFL = -1;
+    polarityFR = 1;
+    polarityBL = 1;
+    polarityBR = -1;
+  }
+  else if(kPolarity > 3 || kPolarity < 0)
+  {
+    // Drive Forward
+    // This is a Failsafe
+    polarityFL = 1;
+    polarityFR = -1;
+    polarityBL = 1;
+    polarityBR = -1;
+  }
 
   maxDriveSpeed = abs(kSpeed);
   setDistance += kDistance < 0 ? kDistance : kDistance*sgn(kSpeed);
@@ -184,8 +228,10 @@ task drivePID() {
   float i = 0.0;
   float d = 0.0;
   word driveSpeed = 0;
-  word speedL = 0;
-  word speedR = 0;
+  word speedFL = 0;
+  word speedFR = 0;
+  word speedBL = 0;
+  word speedBR = 0;
 
   // ==== determine number of ticks per revolution ====
   if(kMotorType == tmotorVex269 || kMotorType == tmotorVex269_HBridge || kMotorType == tmotorVex269_MC29)
@@ -209,15 +255,16 @@ task drivePID() {
 
     driveSpeed = p*kP + i*kI + d*kD;
 
-    speedR = limit(driveSpeed + turnSpeed, maxDriveSpeed);
-    speedL = limit(speedR - 2*turnSpeed, maxDriveSpeed);
-    speedR = limit(speedL + 2*turnSpeed, maxDriveSpeed);
+    speedFL = limit(driveSpeed, maxSpeed);
+    speedBL = limit(driveSpeed, maxSpeed);
+    speedFR = limit(driveSpeed, maxSpeed);
+    speedBR = limit(driveSpeed, maxSpeed);
 
     for(ubyte j=0; j<kDriveMotorsPerSide; j++) {
-      motor[kDriveMotorPort[0][j]] = speedFL;
-      motor[kDriveMotorPort[1][j]] = speedFR;
-      motor[kDriveMotorPort[2][j]] = speedBL;
-      motor[kDriveMotorPort[3][j]] = speedBR;
+      motor[kDriveMotorPort[0][j]] = speedFL * polarityFL;
+      motor[kDriveMotorPort[1][j]] = speedFR * polarityFR;
+      motor[kDriveMotorPort[2][j]] = speedBL * polarityBL;
+      motor[kDriveMotorPort[3][j]] = speedBR * polarityBR;
     }
     prevError = error;
 
@@ -321,10 +368,10 @@ task main() {
   StartTask(syncPID);
   StartTask(liftPID);
 
-  drive(1000);
+  drive(100, 1);
   waitForDrive();
   turn(90.0, 100);
   waitForTurn();
-  lift(2000);
+  lift(1000);
   waitForLift();
 }
