@@ -28,20 +28,37 @@
 
 #include "Vex_Competition_Includes.c"   //Main competition background code...do not modify!
 #include "driveCodeHolo.h" //Contains All Code for Movement of a Holonomic Drive
-//#include "driveCodeTank.h" 
+//#include "driveCodeTank.h"
 
 
 void pre_Auton()
 {
-
+  startTask(ProgramChooser);
 }
 
 task auton()
 {
-
+  StopTask(ProgramChooser);
+  startAuton();
+  StartTask(gyroPID);
+  switch(auto) {
+    case 0: hangingBlue(); break;
+    case 1: hangingBlue1(); break;
+    case 2: hangingRed(); break;
+    case 3: hangingRed1(); break;
+    case 4: middleBlue(); break;
+    case 5: middleBlue1(); break;
+    case 6: middleRed(); break;
+    case 7: middleRed1(); break;
+    case 8: hangingRedHnG(); break;
+    case 9: hangingBlueHng(); break;
+    case 10: ProgrammingSkills(); break;
+    case 11: BlockRed(); break;
+    case 12: BlockBlue(); break;
+  }
 }
 
 task usercontrol()
 {
-
+  startTask(ProgramChooser);
 }
